@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Date: Fri, 20 Oct 2023 04:11:09 GMT
+Server: Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4
+Last-Modified: Fri, 20 Oct 2023 03:33:18 GMT
+ETag: "c80-6081d888b9919"
+Accept-Ranges: bytes
+Content-Length: 3644
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
