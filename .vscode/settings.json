@@ -8,8 +8,13 @@
     "[javascript]":{
         "editor.tabSize": 2
     },
+    "editor.tokenColorCustomizations": {
+        "comments": "#ff00ff" // Cambia el color de los comentarios a rosa (ejemplo)
+    },
+      
     "files.insertFinalNewline": true,
     "workbench.colorTheme": "Community Material Theme Darker High Contrast",
     "terminal.integrated.defaultProfile.windows": "Git Bash",
     "workbench.iconTheme": "material-icon-theme"
+    
 }
