@@ -130,7 +130,7 @@ $contacts = $conn->query("select * from contacts");
                 <p class="m-2"><?= $contact["phone_number"] ?></p>
                 <!-- Párrafo con el número de teléfono del contacto -->
 
-                <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
+                <a href="edit.php?id=<?= $contact["id"] ?>" class="btn btn-secondary mb-2">Edit Contact</a>
                 <!-- Enlace para editar el contacto -->
 
                 <a href="delete.php?id=<?= $contact["id"] ?>" class="btn btn-danger mb-2">Delete Contact</a>
