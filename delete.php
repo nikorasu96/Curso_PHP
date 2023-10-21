@@ -10,6 +10,7 @@ $statement->execute([':id' => $id]);
 if($statement-> rowCount() == 0){
   http_response_code(404);
   echo("HTTP 404 NOT fOUND");
+  exit();
 }
 
 
