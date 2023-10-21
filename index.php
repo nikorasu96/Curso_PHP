@@ -133,7 +133,7 @@ $contacts = $conn->query("select * from contacts");
                 <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
                 <!-- Enlace para editar el contacto -->
 
-                <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
+                <a href="delete.php?id=<?= $contact["id"] ?>" class="btn btn-danger mb-2">Delete Contact</a>
                 <!-- Enlace para eliminar el contacto -->
               </div>
             </div>
