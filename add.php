@@ -1,18 +1,13 @@
 <?php
-// Si se recibe una petición POST, se procesa
+require "database.php";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $contact = [
-    "name" => $_POST["name"],  // Obtiene el nombre del formulario
-    "phone_number" => $_POST["phone_number"],  // Obtiene el número de teléfono del formulario
-  ];
+  $name = $_POST["name"];
+  $phoneNumber = $_POST["phone_number"];
 
-  // Añade el nuevo contacto al array de contactos
-  $contacts[] = $contact;
+  $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES ('$name', '$phoneNumber')");
+  $statement->execute();
 
-  // Guarda el array de contactos en formato JSON en un archivo llamado "contacts.json"
-  file_put_contents("contacts.json", json_encode($contacts));
-
-  // Redirecciona al usuario a "index.php"
   header("Location: index.php");
 }
 ?>

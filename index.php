@@ -1,14 +1,11 @@
 <?php
-// Comprueba si el archivo "contacts.json" existe
-if (file_exists("contacts.json")) {
-  // Si existe, lee su contenido y conviértelo en un array asociativo
-  $contacts = json_decode(file_get_contents("contacts.json"), true);
-} else {
-  // Si no existe, inicializa un array vacío
-  $contacts = [];
-}
-?>
 
+require "database.php";
+
+$contacts = $conn->query("select * from contacts");
+//var_dump($contacts);
+//die();
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -89,7 +86,7 @@ if (file_exists("contacts.json")) {
       <div class="row">
         <!-- Fila de la cuadrícula -->
 
-        <?php if (count($contacts) == 0) : ?>
+        <?php if ($contacts-> rowCount() == 0) : ?>
           <!-- Si no hay contactos guardados -->
 
           <div class="col-md-4 mx-auto">
@@ -108,7 +105,7 @@ if (file_exists("contacts.json")) {
         <?php endif ?>
 
         <?php foreach ($contacts as $contact) : ?>
-          <!-- Por cada contacto en el array -->
+          <!-- Por cada contacto en el array (Bucle) -->
 
           <div class="col-md-4 mb-3">
             <!-- Columna de 4 de ancho con margen inferior de 3 -->
