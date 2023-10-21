@@ -1,11 +1,19 @@
 <?php
 
+// Se incluye el archivo 'database.php' que contiene la configuración de la base de datos
 require "database.php";
 
+// Se ejecuta una consulta SQL para seleccionar todos los registros de la tabla 'contacts'
 $contacts = $conn->query("select * from contacts");
-//var_dump($contacts);
-//die();
+
+
+// var_dump($contacts); 
+// Esta línea imprimiría información detallada sobre la variable $contacts, útil para depuración.
+// die();
+// Esta línea detendría la ejecución del script. Puede ser útil para detener la ejecución en un punto específico durante la depuración.
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

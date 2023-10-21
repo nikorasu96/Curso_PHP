@@ -1,16 +1,35 @@
 <?php
+// Se incluye el archivo 'database.php' que contiene la configuración de la base de datos
 require "database.php";
 
+// Se inicializa una variable de error
+$error = null;
+
+// Se verifica si el formulario se envió usando el método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $name = $_POST["name"];
-  $phoneNumber = $_POST["phone_number"];
+  
+  // Se verifica si alguno de los campos está vacío
+  if (empty($_POST["name"]) || empty($_POST["phone_number"])) {
+    $error = "Please fill all the fields."; // Se asigna un mensaje de error
+  } else if (strlen($_POST["phone_number"]) < 9) {
+    $error = "Phone number must be at least 9 characters."; // Se verifica la longitud del número de teléfono
+  } else {
+    // Si no hay errores, se asignan los valores del formulario a variables
+    $name = $_POST["name"];
+    $phoneNumber = $_POST["phone_number"];
 
-  $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES ('$name', '$phoneNumber')");
-  $statement->execute();
+    // Se prepara una consulta SQL para insertar los datos en la base de datos
+    $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES (:name, :phoneNumber)");
+    $statement->bindParam(":name", $_POST["name"]); // Se vincula el valor del nombre
+    $statement->bindParam(":phoneNumber", $_POST["phoneNumber"]); // Se vincula el valor del número de teléfono
+    $statement->execute(); // Se ejecuta la consulta
 
-  header("Location: index.php");
+    // Se redirige al usuario a una página
+    header("Location: index.php");
+  }
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -61,6 +80,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="card">
             <div class="card-header">Add New Contact</div>
             <div class="card-body">
+              <?php if ($error): ?>
+                <p class="text-danger">
+                  <? $error ?>
+                </p>
+              <?php endif?>
               <form method="post" action="add.php">
                 <div class="mb-3 row">
                   <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
