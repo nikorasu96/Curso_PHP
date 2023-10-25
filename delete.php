@@ -26,4 +26,4 @@ $conn->prepare("DELETE FROM contacts where id = :id")->execute([':id' => $id]);
 //$statement->execute();
 // Ejecutamos la consulta.
 
-header("Location: index.php");
+header("Location: home.php");
