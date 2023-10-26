@@ -21,15 +21,25 @@
       <ul class="navbar-nav">
         <!-- Lista de navegación -->
 
-        <li class="nav-item">
-          <a class="nav-link" href="home.php">Home</a>
-        </li>
+
+
+        <!-- <li class="nav-item"> -->
+        <!--  <a class="nav-link" href="home.php">Home</a>-->
+        <!--</li>-->
         <!-- Elemento de lista de navegación: Inicio -->
 
-        <li class="nav-item">
-          <a class="nav-link" href="./add.php">Add Contact</a>
-        </li>
+        <!--<li class="nav-item"> -->
+        <!--  <a class="nav-link" href="./add.php">Add Contact</a>-->
+        <!--</li>-->
         <!-- Elemento de lista de navegación: Agregar Contacto -->
+
+        <li class="nav-item">
+          <a class="nav-link" href="register.php">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.php">Login</a>
+        </li>
+
       </ul>
     </div>
   </div>
