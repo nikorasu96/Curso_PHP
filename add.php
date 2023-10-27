@@ -2,6 +2,11 @@
 // Se incluye el archivo 'database.php' que contiene la configuración de la base de datos
 require "database.php";
 
+if (!isset($_SESSION["user"])){
+  header("Location: login.php");
+  return;
+}
+
 // Se inicializa una variable de error
 $error = null;
 
