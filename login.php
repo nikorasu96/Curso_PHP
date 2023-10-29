@@ -1,39 +1,38 @@
 <?php
 
-require "database.php";
+  require "database.php";
 
+  $error = null;
 
-$error = null;
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["email"]) || empty($_POST["password"])) {
-    $error = "Please fill all the fileds.";
-  } else if (!str_contains($_POST["email"], "@")) {
-    $error = "Email format is incorrect.";
-  } else {
-    $statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-    $statement->bindParam(":email", $_POST["email"]);
-    $statement->execute();
-
-    if ($statement->rowCount() == 0) {
-      $error = "Invalid Credentials.";
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["email"]) || empty($_POST["password"])) {
+      $error = "Please fill all the fileds.";
+    } else if (!str_contains($_POST["email"], "@")) {
+      $error = "Email format is incorrect.";
     } else {
-      $user = $statement->fetch((PDO::FETCH_ASSOC));
+      $statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+      $statement->bindParam(":email", $_POST["email"]);
+      $statement->execute();
 
-      if (!password_verify($_POST["password"], $user["password"])) {
-        $error = "Invalid Credential.";
+      if ($statement->rowCount() == 0) {
+        $error = "Invalid credentials.";
       } else {
-        session_start();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-        unset($user["password"]);
+        if (!password_verify($_POST["password"], $user["password"])) {
+          $error = "Invalid credentials.";
+        } else {
+          session_start();
 
-        $_SESSION["user"] = $user;
-        header("Location: home.php");
+          unset($user["password"]);
+
+          $_SESSION["user"] = $user;
+
+          header("Location: home.php");
+        }
       }
     }
   }
-}
-
 ?>
 
 <?php require "parcial/header.php" ?>
@@ -44,13 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="card">
         <div class="card-header">Login</div>
         <div class="card-body">
-          <?php if ($error) : ?>
+          <?php if ($error): ?>
             <p class="text-danger">
               <?= $error ?>
             </p>
           <?php endif ?>
           <form method="POST" action="login.php">
-
             <div class="mb-3 row">
               <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
 
